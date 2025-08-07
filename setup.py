@@ -5,13 +5,17 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="rexi-py",
-    version="0.1.0",
+    version="0.1.1",
     author="RexiAPI Team",
     author_email="rexidotsh@outlook.com",
     description="A Python client library for Rexi API",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Rexi-sh/rexi-py",
+    project_urls={
+        "Website": "https://rexi.sh",
+        "Documentation": "https://rexi.sh/docs",
+    },
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
