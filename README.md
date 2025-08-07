@@ -6,7 +6,6 @@
   [![PyPI version](https://img.shields.io/pypi/v/rexi-py.svg)](https://pypi.org/project/rexi-py/)
   [![Python Versions](https://img.shields.io/pypi/pyversions/rexi-py.svg)](https://pypi.org/project/rexi-py/)
   [![License](https://img.shields.io/github/license/Rexi-sh/rexi-py.svg)](https://github.com/Rexi-sh/rexi-py/blob/main/LICENSE)
-  [![Build Status](https://img.shields.io/github/workflow/status/Rexi-sh/rexi-py/CI)](https://github.com/Rexi-sh/rexi-py/actions)
   [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 </div>
 
