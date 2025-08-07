@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="rexi_logo.png" alt="Rexi Logo" width="300"/>
+  <img src="https://github.com/Rexi-sh/rexi-py/raw/main/rexi_logo.png" alt="Rexi Logo" width="300"/>
   <h1>Rexi Python API Client</h1>
   <p>A powerful, modern Python library for interacting with the Rexi API services</p>
   

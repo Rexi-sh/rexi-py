@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="rexi-py",
-    version="0.1.1",
+    version="0.1.3",
     author="RexiAPI Team",
     author_email="rexidotsh@outlook.com",
     description="A Python client library for Rexi API",
