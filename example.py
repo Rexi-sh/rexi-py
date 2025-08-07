@@ -6,7 +6,7 @@ This script demonstrates how to use the Rexi Python API client with all its capa
 
 import os
 import asyncio
-from rexi_py import RexiAPI
+from rexi import RexiAPI
 
 
 async def main():
