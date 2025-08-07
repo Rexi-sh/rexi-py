@@ -7,7 +7,9 @@ This script demonstrates how to use the Rexi Python API client with all its capa
 import os
 import asyncio
 from rexi import RexiAPI
+import dotenv
 
+dotenv.load_dotenv()
 
 async def main():
     # Initialize Rexi API client

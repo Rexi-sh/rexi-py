@@ -6,6 +6,7 @@ Main module containing the RexiAPI class for interacting with the Rexi API.
 
 import os
 import json
+import aiohttp
 from typing import Dict, Any, Optional, List, Union
 
 # Import all submodules
@@ -76,7 +77,7 @@ class RexiAPI:
     @property
     def base_url(self) -> str:
         """Get the base URL for the API."""
-        return self._config.get('base_url', 'https://api.rexi.io/v1')
+        return self._config.get('base_url', 'https://api.rexi.sh')
     
     async def _request(self, method: str, endpoint: str, params: Optional[Dict[str, Any]] = None,
                       path_params: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
@@ -99,38 +100,59 @@ class RexiAPI:
                 if placeholder in endpoint:
                     endpoint = endpoint.replace(placeholder, str(value))
         
-        # This is a placeholder for the actual implementation
-        # In a real implementation, you would use a library like aiohttp or httpx
-        # to make asynchronous HTTP requests
-        
-        # For now, we'll just return empty dictionaries as placeholders
-        # In a real implementation, you would:
-        # 1. Construct the full URL from base_url and endpoint
-        # 2. Add headers including X-API-Key for authentication
-        # 3. Make the actual HTTP request
-        # 4. Parse and return the response
-        
-        # Example of what a real implementation might look like (pseudo-code):
-        """
-        import httpx
-        
-        headers = {
-            "X-API-Key": self.api_key,
-            "Content-Type": "application/json"
-        }
-        
+        # Construct the full URL from base_url and endpoint
         url = f"{self.base_url}{endpoint}"
         
-        async with httpx.AsyncClient() as client:
-            if method.upper() == "GET":
-                response = await client.get(url, headers=headers, params=params)
-            elif method.upper() == "POST":
-                response = await client.post(url, headers=headers, json=params)
-            # Handle other methods...
-            
-            response.raise_for_status()
-            return response.json()
-        """
+        # Debug information
+        print(f"Making {method} request to: {url}")
         
-        # Placeholder response
-        return {}
+        # Set up headers with API key for authentication
+        headers = {
+            "X-API-Key": self.api_key,
+            "Content-Type": "application/json",
+            "User-Agent": "Rexi-Python-Client/0.1.5"
+        }
+        
+        try:
+            # Create a client session and make the request
+            async with aiohttp.ClientSession() as session:
+                if method.upper() == "GET":
+                    async with session.get(url, headers=headers, params=params) as response:
+                        response.raise_for_status()
+                        return await response.json()
+                        
+                elif method.upper() == "POST":
+                    async with session.post(url, headers=headers, json=params) as response:
+                        response.raise_for_status()
+                        return await response.json()
+                        
+                elif method.upper() == "PUT":
+                    async with session.put(url, headers=headers, json=params) as response:
+                        response.raise_for_status()
+                        return await response.json()
+                        
+                elif method.upper() == "DELETE":
+                    async with session.delete(url, headers=headers, params=params) as response:
+                        response.raise_for_status()
+                        return await response.json()
+                        
+                else:
+                    raise ValueError(f"Unsupported HTTP method: {method}")
+                    
+        except aiohttp.ClientResponseError as e:
+            # Handle HTTP errors from the API
+            error_msg = f"API request failed with status {e.status}: {e.message}"
+            print(f"Error: {error_msg}")
+            return {"error": error_msg, "status": e.status}
+            
+        except aiohttp.ClientError as e:
+            # Handle connection errors
+            error_msg = f"Connection error: {str(e)}"
+            print(f"Error: {error_msg}")
+            return {"error": error_msg}
+            
+        except Exception as e:
+            # Handle any other exceptions
+            error_msg = f"Unexpected error during API request: {str(e)}"
+            print(f"Error: {error_msg}")
+            return {"error": error_msg}
