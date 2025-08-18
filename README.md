@@ -16,11 +16,11 @@ Rexi Python API Client is a comprehensive toolkit for interacting with the Rexi 
 ## Installation
 
 ```bash
-# Once published to PyPI, you can install with:
-# pip install rexi-py
+# You can install using
+pip install rexi-py
 
-# For now, install directly from the source:
-# pip install git+https://github.com/yourusername/rexi-py.git
+# Or using source
+pip install git+https://github.com/Rexi-sh/rexi-py.git
 ```
 
 ## Features
